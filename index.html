@@ -3,84 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Website with Table and Interactive Plot</title>
-    <!-- Include Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Static Website with Table and Plot</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
         table {
+            width: 100%;
             border-collapse: collapse;
-            width: 50%;
             margin-bottom: 20px;
         }
-        table, th, td {
-            border: 1px solid black;
-        }
         th, td {
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
-        #plot {
-            width: 80%;
-            margin: auto;
+        th {
+            background-color: #f4f4f4;
+        }
+        canvas {
+            max-width: 100%;
         }
     </style>
 </head>
 <body>
     <h1>Data Table and Interactive Plot</h1>
 
-    <!-- Data Table -->
+    <!-- Table -->
     <table>
         <thead>
             <tr>
-                <th>X</th>
-                <th>Y</th>
+                <th>Datum</th>
+                <th>Entfernung</th>
+                <th>Geschwindigkeit</th>
             </tr>
         </thead>
         <tbody id="data-table">
-            <!-- Data rows will be dynamically added here -->
+            <tr>
+                <td>2025-04-01</td>
+                <td>100</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>2025-04-02</td>
+                <td>200</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>2025-04-03</td>
+                <td>300</td>
+                <td>70</td>
+            </tr>
         </tbody>
     </table>
 
-    <!-- Plot Container -->
-    <div id="plot"></div>
+    <!-- Plot -->
+    <canvas id="dataChart"></canvas>
 
     <script>
-        // Sample Data
-        const data = [
-            { x: 1, y: 10 },
-            { x: 2, y: 15 },
-            { x: 3, y: 13 },
-            { x: 4, y: 17 },
-            { x: 5, y: 19 }
-        ];
+        // Data for the chart
+        const labels = ["2025-04-01", "2025-04-02", "2025-04-03"];
+        const entfernungData = [100, 200, 300];
+        const geschwindigkeitData = [50, 60, 70];
 
-        // Populate the Table
-        const tableBody = document.getElementById('data-table');
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${row.x}</td><td>${row.y}</td>`;
-            tableBody.appendChild(tr);
+        // Create the chart
+        const ctx = document.getElementById('dataChart').getContext('2d');
+        const dataChart = new Chart(ctx, {
+            type: 'line', // Line chart
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Entfernung',
+                        data: entfernungData,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Geschwindigkeit',
+                        data: geschwindigkeitData,
+                        borderColor: 'green',
+                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Datum'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Values'
+                        }
+                    }
+                }
+            }
         });
-
-        // Create the Plot
-        const trace = {
-            x: data.map(row => row.x),
-            y: data.map(row => row.y),
-            mode: 'lines+markers',
-            type: 'scatter'
-        };
-
-        const layout = {
-            title: 'Interactive X-Y Plot',
-            xaxis: { title: 'X-axis' },
-            yaxis: { title: 'Y-axis' }
-        };
-
-        Plotly.newPlot('plot', [trace], layout);
     </script>
 </body>
 </html>
