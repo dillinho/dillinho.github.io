@@ -1,1 +1,86 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Website with Table and Interactive Plot</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        #plot {
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Table and Interactive Plot</h1>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+            </tr>
+        </thead>
+        <tbody id="data-table">
+            <!-- Data rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <!-- Plot Container -->
+    <div id="plot"></div>
+
+    <script>
+        // Sample Data
+        const data = [
+            { x: 1, y: 10 },
+            { x: 2, y: 15 },
+            { x: 3, y: 13 },
+            { x: 4, y: 17 },
+            { x: 5, y: 19 }
+        ];
+
+        // Populate the Table
+        const tableBody = document.getElementById('data-table');
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row.x}</td><td>${row.y}</td>`;
+            tableBody.appendChild(tr);
+        });
+
+        // Create the Plot
+        const trace = {
+            x: data.map(row => row.x),
+            y: data.map(row => row.y),
+            mode: 'lines+markers',
+            type: 'scatter'
+        };
+
+        const layout = {
+            title: 'Interactive X-Y Plot',
+            xaxis: { title: 'X-axis' },
+            yaxis: { title: 'Y-axis' }
+        };
+
+        Plotly.newPlot('plot', [trace], layout);
+    </script>
+</body>
+</html>
