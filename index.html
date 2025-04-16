@@ -3,117 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Website with Table and Plot</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        canvas {
-            max-width: 100%;
-        }
-    </style>
+    <title>Interactive Plot</title>
 </head>
 <body>
-    <h1>Data Table and Interactive Plot</h1>
-
-    <!-- Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>DatumTe</th>
-                <th>Entfernung</th>
-                <th>Geschwindigkeit</th>
-            </tr>
-        </thead>
-        <tbody id="data-table">
-            <tr>
-                <td>2025-04-01</td>
-                <td>100</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>2025-04-02</td>
-                <td>200</td>
-                <td>60</td>
-            </tr>
-            <tr>
-                <td>2025-04-03</td>
-                <td>300</td>
-                <td>70</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Plot -->
-    <canvas id="dataChart"></canvas>
-
-    <script>
-        // Data for the chart
-        const labels = ["2025-04-01", "2025-04-02", "2025-04-03"];
-        const entfernungData = [100, 200, 300];
-        const geschwindigkeitData = [50, 60, 70];
-
-        // Create the chart
-        const ctx = document.getElementById('dataChart').getContext('2d');
-        const dataChart = new Chart(ctx, {
-            type: 'line', // Line chart
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Entfernung',
-                        data: entfernungData,
-                        borderColor: 'blue',
-                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                        fill: true
-                    },
-                    {
-                        label: 'Geschwindigkeit',
-                        data: geschwindigkeitData,
-                        borderColor: 'green',
-                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Datum'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Values'
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+    <h1>Interactive Plot Example</h1>
+    <p>This is an interactive plot created using Plotly.</p>
+    <iframe src="plot1.html" width="100%" height="600px" frameborder="0"></iframe>
+    <iframe src="plot2.html" width="100%" height="600px" frameborder="0"></iframe>
+	<iframe src="plot3.html" width="100%" height="600px" frameborder="0"></iframe>
+	<h1>Interactive Plot Example</h1>
+	<p>This is an interactive plot created using Plotly.</p>
+    <iframe src="table.html" width="100%" height="600px" frameborder="0"></iframe>
 </body>
 </html>
